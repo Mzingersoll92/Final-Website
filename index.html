@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            console.log('doc ready!');
+            
+            $('#submit').click(function(){
+            
+                var search_term = {
+                    q: 'tweettest'
+                };
+                console.dir(search_term);
+                search(search_term);
+        });
+ 
+        function search(search_term) {
+            console.log('searching for ');
+            console.dir(search_item);
+            
+            $.ajax({
+                url: 'http://twitter.com/dota2?lang=en'+ $.param(search_term),
+                dataType: 'jsonp'
+                success: function(data) {
+                    console.dir(data);
+                    for (item in data ['results']){
+                        $('tweets').append(
+                            '<li>' + data['results'][item]['text'] + '</li>';
+                            )
+                    }
+                }
+            });
+        }   
+    </script>    
+    <link href="main.css" type="text/css" rel="stylesheet">
+    <h1>CSE 322 Final Project Fall 2016 Michael Ingersoll</h1>
+    
+</head>    
+    <body>
+        <h2>Dota 2 stats and how they work</h2>
+<ul>
+  <li><a href="str.html">Strength</a>
+  <li><a href="agi.html">Agility</a>
+  <li><a href="int.html">Inteligence</a>
+</ul>
+        <h3>What is going on recently with Dota 2</h3>
+            <a href="#" id="submit">Get tweets</a>
+</body>
+</html>
